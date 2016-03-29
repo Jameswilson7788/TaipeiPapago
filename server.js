@@ -10,14 +10,18 @@ var express    =  require('express'),
 
 var app = express();
 
-//	TODO:Create a WEB API engine
+	//TODO:Create a WEB API engine
 	app.use(morgan('dev'));
 	app.use(bodyParser.json());
 	app.engine('ejs',ejsMate);
 	app.set('view engine','ejs');
+	
 	//TODO:reset Web app Route,Create a template
 	app.get('/' , function(req,res){
 		res.render('home');
+	})
+	app.get('/start',function(req,res){
+		res.render('start');
 	})
 	
 	
