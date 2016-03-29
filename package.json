@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Jameswilson7788/TaipeiPapago#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "ejs": "^2.4.1",
     "ejs-mate": "^2.3.0",

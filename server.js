@@ -4,12 +4,38 @@ var express    =  require('express'),
 	ejsMate    =  require('ejs-mate'),
 	morgan     =  require('morgan'),
 	bodyParser =  require('body-parser');
-
-//var User       =  require('./models/user');
+	
+var User       =  require('./models/user');
 
 
 var app = express();
 
+	//TODO:connect a DataBase
+	mongoose.connect('mongodb://root:weigo123@ds023078.mlab.com:23078/papago',function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log('successfully Connecting Database');
+		}
+	});
+	
+	
+	app.post('/create-user',function(req,res,next){
+		var user = new User();
+		user.profile.name = req.body.name;
+		user.password = req.body.password;
+		user.email = req.body.email;
+		
+		user.save(function(err){
+			if(err) next(err);
+			res.json('Successfully create a new user');
+		});
+		
+	});
+	
+	
+	
+	
 	//TODO:Create a WEB API engine
 	app.use(morgan('dev'));
 	app.use(bodyParser.json());
