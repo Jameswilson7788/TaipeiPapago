@@ -10,7 +10,6 @@ var User       =  require('./models/user');
 
 var app = express();
 
-	//TODO:connect a DataBase
 	mongoose.connect('mongodb://root:weigo123@ds023078.mlab.com:23078/papago',function(err){
 		if(err){
 			console.log(err);
@@ -19,7 +18,8 @@ var app = express();
 		}
 	});
 	
-	
+
+//  TODO:Remove to Routes,Reset Router.
 	app.post('/create-user',function(req,res,next){
 		var user = new User();
 		user.profile.name = req.body.name;
@@ -42,12 +42,15 @@ var app = express();
 	app.engine('ejs',ejsMate);
 	app.set('view engine','ejs');
 	
-	//TODO:reset Web app Route,Create a template
+	//TODO:Reset Router
 	app.get('/' , function(req,res){
-		res.render('home');
+		res.render('main/home');
 	})
 	app.get('/start',function(req,res){
 		res.render('start');
+	})
+	app.get('/about',function(req,res){
+		res.render('main/about');
 	})
 	
 	
@@ -58,4 +61,9 @@ var app = express();
 		console.log('Hello 3000');
 	})
 	
+
+//TODO:Add a views/main folder.
+//TODO:move home,start to main folder.
+//TODO:Create a good boilerplate
+
 	
