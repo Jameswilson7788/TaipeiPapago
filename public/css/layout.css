@@ -1,0 +1,10 @@
+*{margin:0;padding:0;}
+
+.auth-center{
+	-moz-box-align: center;
+	-webkit-box-align: center;
+	box-align:center;
+	width:625px;
+	height:420px;
+	background:red;
+}

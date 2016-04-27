@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+//初始化
+function initialize() {
+
+  //地圖核心位置
+  var mapProp = {
+    center:new google.maps.LatLng(25, 121.5),
+    zoom:12,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+//讀取jsno檔
+  var xmlhttp = new XMLHttpRequest();
+  var url = "/assets.json";
+
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          var myArr = JSON.parse(xmlhttp.responseText);
+          myFunction(myArr);
+      }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+  function myFunction(arr) {
+      var out = "";
+      var i;
+      var infowindow;
+      for(i = 0; i < arr.length; i++) {
+        //地圖底下的呈現
+          out += '<p>' + arr[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+          arr[i].type + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + arr[i].adress + '</p><br>';
+
+        //放上marker
+          var marker=new google.maps.Marker({
+            position:new google.maps.LatLng(arr[i].latitude, arr[i].longitude),
+            });
+          marker.setMap(map);
+
+           infowindow = new google.maps.InfoWindow({
+
+            });
+          var  content=arr[i].content;
+
+          //監聽點擊事件
+          google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+              return function() {
+
+                if (isInfoWindowOpen(infowindow)){
+                    // do something if it is open
+                    infowindow.close();
+                } else {
+                    // do something if it is closed
+                    infowindow.setContent(content);
+                    infowindow.open(map,marker);
+                }
+
+              };
+          })(marker,content,infowindow));
+
+      }
+
+      document.getElementById("show").innerHTML = out;
+  }
+//判斷是偶有打開資訊欄
+  function isInfoWindowOpen(infoWindow){
+    var map = infoWindow.getMap();
+    return (map !== null && typeof map !== "undefined");
+}
+
+
+
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+<div id="googleMap" style="width:600px;height:480px;"></div>
+<div id="show"></div>
+</body>
+
+</html>
