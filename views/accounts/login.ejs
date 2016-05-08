@@ -1,31 +1,16 @@
-<% layout('layout')  -%>
-
-<div class = 'row'>
-
-	<div class = 'col-lg-6 col-md-offset-3'>
-		<h1>登錄</h1>
-		<% if(message.length > 0){ %>
-			<div class="alert alert-danger alert-dismissible">
-				<button type ='button' class="close" arial-label='close'>
-				<span arial=hidden='true'>&times;</span>
-				</button>
-				<%= message %>
-			</div>
-		<% } %>
-
-		<form method = 'post'>
-			<div class="form-group">
-			</div>
-			<div class="form-group">
-				<label>電子郵件:</label>
-				<input type="email" class="form-control" name='email'/>
-			</div>
-			<div class="form-group">
-				<label>密碼：</label>
-				<input type="password" class="form-contrl" name='password'/>
-			</div>
-			<button type='success' class="btn btn-success">送出</button>
-		</form>
-
-	</div>
-</div>
+<%- layout('layout') -%>
+      <!-- start auth-form -->
+      <div class="auth-form">
+        <form method="post">
+          <h1 id="title">歡迎你回來</h1>
+          <div class="auth-form-group">
+            <label>電子信箱</label><br>
+            <input class="input" id="register-email" autocomplete="off" spellcheck="false"><br>
+            <label>密碼</label><br>
+            <input class="input" id="register-password" type="password" autocomplete="off" spellcheck="false"><br>
+            <label><a id="forgot-password" href="#">忘記密碼？</a></label>
+            <input id="submit" type="submit" value="登入"><br>
+            <label id="signup">還沒成為會員嗎？<a href="/signup">註冊</a></label>
+          </div>
+        </form><!-- form end-->
+      </div><!--div form end-->

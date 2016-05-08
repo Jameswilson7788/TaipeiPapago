@@ -1,0 +1,25 @@
+<%- layout('layout') -%>
+
+
+
+<div class="auth-form">
+        <form method="post">
+          <h1 id="title">建立一個新帳號吧</h1>
+       
+          <div class="auth-form-group">
+          	<%if (errors.length > 0){ %>
+			<div class='error' style='font-size: 10px;'>
+				<%= errors %>
+			</div>
+			<% } %>
+            <label>姓名</label><br>
+            <input class="input" id="register-name" autocomplete="off" spellcheck="false"><br>
+            <label>電子信箱</label><br>
+            <input class="input" id="register-email" autocomplete="off" spellcheck="false"><br>
+            <label>密碼</label><br>
+            <input class="input" id="register-password" type="password" autocomplete="off" spellcheck="false"><br>
+            <input id="submit" type="submit" value="註冊"><br>
+            <label id="login" style="font-size:12px;">已經有一個帳號了？<a href="/">登入</a></label>
+          </div>
+        </form><!-- form end-->
+      </div><!--div form end-->
