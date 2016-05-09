@@ -2,6 +2,12 @@
       <!-- start auth-form -->
       <div class="auth-form">
         <form method="post">
+        	<div class="auth-form-group">
+          	<%if (message.length > 0){ %>
+							<div class='error' style='font-size: 10px;'>
+								<%= message %>
+							</div>
+						<% } %>
           <h1 id="title">歡迎你回來</h1>
           <div class="auth-form-group">
             <label>電子信箱</label><br>

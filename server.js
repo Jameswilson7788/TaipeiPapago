@@ -8,7 +8,7 @@ var express      =  require('express'),
 	cookieParser =  require('cookie-parser'),
 	flash        =  require('express-flash'),
 	passport     =  require('passport'),
-	MongoStore   =  require('connect-mongo')(session);
+	MongoStore   =  require('connect-mongo/es5')(session);
 	
 var User         =  require('./models/user'),
 	mainRoutes   =  require('./routes/main'),
@@ -40,6 +40,8 @@ var app = express();
 		store:new MongoStore({url:secret.database,autoReconnect:true})
 	}));
 	app.use(flash());
+	app.use(passport.initialize());
+	app.use(passport.session());
 	app.engine('ejs',ejsMate);
 	app.set('view engine','ejs');
 	app.use(mainRoutes);

@@ -1,6 +1,6 @@
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Stretegy();
-
+var LocalStrategy = require('passport-local').Strategy;
+var User = require('../models/user');
 
 //serialize and deserialize
 passport.serializeUser(function(user,done){
@@ -20,7 +20,7 @@ passport.use('local-login',new LocalStrategy({
 	usernameField: 'email',
 	passwordField: 'password',
 	passReqToCallback :true
-},function(req,email,password,done(){
+},function(req,email,password,done){
 	User.findOne({email:email},function(err,user){
 		if(err) return done(err);
 		if(!user){
