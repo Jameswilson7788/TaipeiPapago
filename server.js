@@ -10,7 +10,7 @@ var express      =  require('express'),
 	passport     =  require('passport'),
 	MongoStore   =  require('connect-mongo/es5')(session);
 	
-var User         =  require('./models/user'),
+var User             =  require('./models/user'),
 	mainRoutes   =  require('./routes/main'),
 	userRoutes   =  require('./routes/user'),
 	secret       =  require('./config/secret');
@@ -42,6 +42,10 @@ var app = express();
 	app.use(flash());
 	app.use(passport.initialize());
 	app.use(passport.session());
+	app.use(function(req,res,next){
+		res.locals.user = req.user;
+		next();
+	});
 	app.engine('ejs',ejsMate);
 	app.set('view engine','ejs');
 	app.use(mainRoutes);

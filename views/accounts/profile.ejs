@@ -1,3 +1,17 @@
 <% layout('bodyPlate') -%>
 
-<div>wwww</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-md-4">
+			<img src="<%= user.profile.picture %>" alt="" class="img-circle imgresponsive img-center" />
+			<br />
+			<p>名字:<%= user.profile.name %></p>
+			<p>電子信箱:<%= user.email %></p>
+			<% if (user.address ==="" || typeof user.address ==='undefined') { %>
+				<p>地址:<a href="edit-profile">新增地址</a></p>
+				<% }else{ %>
+				<p>地址:<%= user.address%></p>
+			<% } %>
+		</div>
+	</div>
+</div>

@@ -34,6 +34,7 @@ var passportConf = require('../config/passport');
 	  user.profile.name = req.body.name;
 	  user.email = req.body.email;
 	  user.password = req.body.password;
+	  user.profile.picture = user.gravatar();
 	
 	  User.findOne({ email: req.body.email }, function(err, existingUser) {
 	
@@ -52,6 +53,25 @@ var passportConf = require('../config/passport');
 	      });
 	    }
 	  });
+	});
+	
+	router.get('/logout',function(req,res,next){
+		req.logout();
+		res.redirect('/');
+	});
+	
+	router.get('/edit-profile',function(req,res,next){
+		res.render('accounts/edit-profile',{message:req.flash('sucessful')});	
+	});
+	router.post('/edit-profile',function(req,res,next){
+		User.findOne({_id:req.user._id},function(err,user){
+			if(err) return next(err);
+			if(req.body.name) user.profile.name = req.body.name;
+			user.save(function(err){
+				if(err) return next(err);
+				req.flash('sucess','修改資料成功');
+			})
+		});
 	});
 	
 module.exports = router;
